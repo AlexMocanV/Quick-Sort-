@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long x[1001];
+
+int partition1(int x[], int start, int endi )
+{
+    int pivot;
+    pivot=x[endi];
+    int index=start;
+    int i=start;
+    for(i=start;i<=endi-1;i++)
+    {
+        if(x[i]<=pivot)
+        {
+            swap(x[i],x[index]);
+            index++;
+        }
+    }
+    swap(x[endi],x[index]);
+    return index;
+}
+
+void quicksort(int x[],int start,int endi)
+{
+    int pivot;
+    if(start < endi)
+    {
+        pivot=partition1(x,start ,endi);
+        quicksort(x,pivot+1,endi);
+        quicksort(x,start,pivot-1);
+    }
+}
+
+int main()
+{
+    int x[]={1, 9, 6, 3 ,5 ,7 ,8},n,i;
+    n=sizeof(x)/sizeof(x[0]);
+    quicksort(x,0,n);
+    for(i=1;i<=n;i++)
+    {
+        cout<<x[i]<<" ";
+    }
+    return 0;
+}
+//complexitate O(n*log n) sau daca sirul este sortat crescator sau descrescator O(n^2)
